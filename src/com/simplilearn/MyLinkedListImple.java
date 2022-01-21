@@ -97,10 +97,10 @@ public class MyLinkedListImple {
         	node mid = middleNode(start, last);
         	
             if (mid == null) return null;
-            if ( ((mid.val).compareToIgnoreCase(value))  == 0 )
+            if ( ((mid.val).compareTo(value))  == 0 )
                 return mid.val;
  
-            else if ((mid.val).compareToIgnoreCase(value) < 0)
+            else if ((mid.val).compareTo(value) < 0)
             {
                 start = mid.next;
             }

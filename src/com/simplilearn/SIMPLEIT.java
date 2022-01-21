@@ -2,6 +2,7 @@ package com.simplilearn;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import org.apache.commons.io.FilenameUtils;
 
 public class SIMPLEIT
 {
@@ -10,7 +11,24 @@ public class SIMPLEIT
    private static Scanner in = new Scanner(System.in);
     
 public static void main(String[] args) 
-{		String userinput ; 
+{
+	    String userinput ;
+		System.out.println("Application name is SimpliLearnProject1. \n");
+		System.out.println("Developer details : Nabil Mohamed Nabil Gomaa \n" 
+		+ "main list has options a,b,c to choose from \n user should enter character a or b or c"  );	
+		File x = new File("/D:/") ;
+		File[] y = x.listFiles();
+		for(File xy : y) {
+			if(xy.isDirectory()){
+				mylist.add(xy); //list of directories
+			
+				}
+			if(xy.isFile()){
+				String fileNameWithOutExt = FilenameUtils.removeExtension(xy.getName());
+				mylist2.push(fileNameWithOutExt); // list of files
+				}      		
+			}
+
 		do{
 		    System.out.println("please select one of the 3 options ( a , b , c) from below \n");
 		    System.out.println(" a : List Files \n" + " b :  user interface Options \n" 
@@ -24,20 +42,6 @@ public static void main(String[] args)
  }
 
 private static void OptionA (){
-	File x = new File("/D:/") ;
-	File[] y = x.listFiles();
-	for(File xy : y) {
-		if(xy.isDirectory()){
-			//System.out.println("it is a Directory ..\n " + xy.getName());
-			mylist.add(xy); //list of directories
-		
-			}
-		if(xy.isFile()){
-			//System.out.println("it is a File ..\n" + xy.getName());
-			mylist2.push(xy.getName()); // list of files
-			}      		
-		}
-
     
 	mylist2.head = mylist2.mergeSort(mylist2.head);
 	System.out.print("List of Files in Ascending order \n");
@@ -51,6 +55,7 @@ private static void OptionA (){
 }
 private static void OptionB()
 {	
+	 OptionA ();
 	 String userinput  ; 
 	 System.out.println("please select one of the 4 options ( d , e , f , g) from below \n");
      System.out.println(" d : Add a file to the existing directory list \n" 
@@ -71,7 +76,7 @@ private static void OptionB()
 			e.printStackTrace();
 		}
     	 if(x.exists())
-    	 System.out.println("name of file is" + x.getName());
+    	 System.out.println("File added is" + x.getName());
     	 
      }
      else if( userinput.equals("e"))
@@ -81,9 +86,9 @@ private static void OptionB()
     	 File x = new File("/D:/" + userinput ) ;
     	 Boolean res = x.delete();
     	 if(res){
-    		 System.out.println("deleted \n");
+    		 System.out.println("File deleted \n");
     	 } else {
-    		 System.out.println("not deleted \n");
+    		 System.out.println("File not found \n");
     	 }   	 
      }
      else if( userinput.equals("f"))
