@@ -6,8 +6,6 @@ import org.apache.commons.io.FilenameUtils;
 
 public class SIMPLEIT
 {
- //  private static LinkedList<File> mylist      =  new LinkedList<File>();
-//   private static MyLinkedListImple mylist2  =  new MyLinkedListImple();
    private static Scanner in = new Scanner(System.in);
    static String SpecificPath = System.getProperty("user.dir") ;
    
@@ -36,7 +34,7 @@ private static void OptionA (){
 	System.out.print("List of Files in Ascending order \n");
 	mylist2.printList(mylist2.head);
 
-	// System.out.println("find or not\n" + Integer.toString(SIMPLEIT.search(mylist)) );
+
 	System.out.println("List of Directories in Ascending order \n");
 	SIMPLEIT.traverse(mylist);
 
@@ -58,7 +56,7 @@ private static void OptionB()
      {
     	 System.out.println("Enter name of File \n");
     	 userinput = in.nextLine();
-    	 //File x = new File("/D:/" + userinput ) ;
+
     	 File x = new File(SpecificPath + "/" + userinput ) ;
     	 try {
 			x.createNewFile();
@@ -74,7 +72,7 @@ private static void OptionB()
      {
     	 System.out.println("Enter name of File \n");
     	 userinput = in.nextLine();
-    	// File x = new File("/D:/" + userinput ) ;
+
     	 File x = new File(SpecificPath + "/" + userinput ) ;
     	 Boolean res = x.delete();
     	 if(res){
