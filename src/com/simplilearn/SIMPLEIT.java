@@ -6,29 +6,17 @@ import org.apache.commons.io.FilenameUtils;
 
 public class SIMPLEIT
 {
-   private static LinkedList<File> mylist    =  new LinkedList<File>();
-   private static MyLinkedListImple mylist2  =  new MyLinkedListImple();
+ //  private static LinkedList<File> mylist      =  new LinkedList<File>();
+//   private static MyLinkedListImple mylist2  =  new MyLinkedListImple();
    private static Scanner in = new Scanner(System.in);
-    
+   static String SpecificPath = System.getProperty("user.dir") ;
+   
 public static void main(String[] args) 
 {
-	    String userinput ;
+	    String userinput ;    
 		System.out.println("Application name is SimpliLearnProject1. \n");
 		System.out.println("Developer details : Nabil Mohamed Nabil Gomaa \n" 
 		+ "main list has options a,b,c to choose from \n user should enter character a or b or c"  );	
-		File x = new File("/D:/") ;
-		File[] y = x.listFiles();
-		for(File xy : y) {
-			if(xy.isDirectory()){
-				mylist.add(xy); //list of directories
-			
-				}
-			if(xy.isFile()){
-				String fileNameWithOutExt = FilenameUtils.removeExtension(xy.getName());
-				mylist2.push(fileNameWithOutExt); // list of files
-				}      		
-			}
-
 		do{
 		    System.out.println("please select one of the 3 options ( a , b , c) from below \n");
 		    System.out.println(" a : List Files \n" + " b :  user interface Options \n" 
@@ -42,11 +30,11 @@ public static void main(String[] args)
  }
 
 private static void OptionA (){
-    
+	MyLinkedListImple mylist2  =  GetFilesList();
+	LinkedList<File> mylist    =  GetDirectoriesList();
 	mylist2.head = mylist2.mergeSort(mylist2.head);
 	System.out.print("List of Files in Ascending order \n");
 	mylist2.printList(mylist2.head);
-
 
 	// System.out.println("find or not\n" + Integer.toString(SIMPLEIT.search(mylist)) );
 	System.out.println("List of Directories in Ascending order \n");
@@ -55,7 +43,8 @@ private static void OptionA (){
 }
 private static void OptionB()
 {	
-	 OptionA ();
+	 MyLinkedListImple mylist2  =  GetFilesList();
+	 LinkedList<File> mylist    =  GetDirectoriesList();
 	 String userinput  ; 
 	 System.out.println("please select one of the 4 options ( d , e , f , g) from below \n");
      System.out.println(" d : Add a file to the existing directory list \n" 
@@ -69,21 +58,24 @@ private static void OptionB()
      {
     	 System.out.println("Enter name of File \n");
     	 userinput = in.nextLine();
-    	 File x = new File("/D:/" + userinput ) ;
+    	 //File x = new File("/D:/" + userinput ) ;
+    	 File x = new File(SpecificPath + "/" + userinput ) ;
     	 try {
 			x.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
     	 if(x.exists())
+    	 {
     	 System.out.println("File added is" + x.getName());
-    	 
+    	 }
      }
      else if( userinput.equals("e"))
      {
     	 System.out.println("Enter name of File \n");
     	 userinput = in.nextLine();
-    	 File x = new File("/D:/" + userinput ) ;
+    	// File x = new File("/D:/" + userinput ) ;
+    	 File x = new File(SpecificPath + "/" + userinput ) ;
     	 Boolean res = x.delete();
     	 if(res){
     		 System.out.println("File deleted \n");
@@ -110,6 +102,36 @@ private static void OptionB()
      }
 }
 
+private static MyLinkedListImple GetFilesList(){
+	MyLinkedListImple mylist2  =  new MyLinkedListImple();
+	//File x = new File("/D:/") ;
+	File x = new File(SpecificPath);
+	File[] y = x.listFiles();
+	for(File xy : y) {
+		if(xy.isFile()){
+			if(xy.getName().contains(".")){
+
+			   mylist2.push(xy.getName().split("\\.")[0]); // list of files
+			  }
+			else {
+				mylist2.push(xy.getName()); // list of files
+			 }
+		   }      		
+		}
+	return mylist2 ;
+}
+private static LinkedList<File> GetDirectoriesList(){
+	LinkedList<File> mylist      =  new LinkedList<File>();
+	File x = new File(SpecificPath);
+	File[] y = x.listFiles();
+	for(File xy : y) {
+		if(xy.isDirectory()){
+			mylist.add(xy); //list of directories
+		
+			}    		
+		}
+	return mylist ;
+}
 
 private  static void traverse (List<File> thelist){
 
